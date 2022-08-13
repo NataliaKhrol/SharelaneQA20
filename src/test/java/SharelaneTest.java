@@ -34,7 +34,6 @@ public class SharelaneTest {
         boolean isOpened = browser.findElement(By.cssSelector("[value=Register]")).isDisplayed();
         assertTrue(isOpened, "Sign Up page was not opened");
         browser.quit();
-
     }
 
     @Test
@@ -43,8 +42,10 @@ public class SharelaneTest {
         WebDriver browser = new ChromeDriver();
         browser.get("https://sharelane.com/cgi-bin/register.py");
         browser.findElement(By.name("zip_code")).sendKeys("123456");
+        browser.findElement(By.cssSelector("[value=Continue]")).click();
+        String error = browser.findElement(By.cssSelector("[class=error_message]")).getText();
+        assertEquals(error, "Oops, error on page. ZIP code should have 5 digits");
         browser.quit();
-
     }
 
    @Test
